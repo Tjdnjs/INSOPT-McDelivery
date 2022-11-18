@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 const getCart = async () => {};
@@ -6,8 +6,8 @@ const getCart = async () => {};
 const putCart = async () => {};
 
 const cartService = {
-  getCart,
-  putCart,
+    getCart,
+    putCart,
 };
 
 export default cartService;

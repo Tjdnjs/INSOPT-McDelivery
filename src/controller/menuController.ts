@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import { menuService } from "../service";
+import { Request, Response } from 'express';
+import { menuService } from '../service';
 
 //~ 카테고리 별 메뉴 조회
 const getMenuByCategory = async (req: Request, res: Response) => {};
@@ -8,8 +8,8 @@ const getMenuByCategory = async (req: Request, res: Response) => {};
 const getMenuInfo = async (req: Request, res: Response) => {};
 
 const menuController = {
-  getMenuByCategory,
-  getMenuInfo,
+    getMenuByCategory,
+    getMenuInfo,
 };
 
 export default menuController;

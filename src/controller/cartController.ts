@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import { cartService } from "../service";
+import { Request, Response } from 'express';
+import { cartService } from '../service';
 
 //~ 장바구니 조회
 const getCart = async (req: Request, res: Response) => {};
@@ -7,8 +7,8 @@ const getCart = async (req: Request, res: Response) => {};
 const putCart = async (req: Request, res: Response) => {};
 
 const cartController = {
-  getCart,
-  putCart,
+    getCart,
+    putCart,
 };
 
 export default cartController;
