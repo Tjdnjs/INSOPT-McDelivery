@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model cart {
+  menuId   Int?
+  largeSet Int      @default(0)
+  set      Int?     @default(0)
+  only     Int?     @default(0)
+  menutbl  menutbl? @relation(fields: [menuId], references: [menuId], onDelete: Cascade, map: "cart_menutbl_menuid_fk")
+
+  @@ignore
+}
+
+model categorytbl {
+  categoryId   Int       @id @default(autoincrement())
+  categoryName String    @db.VarChar(40)
+  menutbl      menutbl[]
+}
+
+model menutbl {
+  menuId      Int         @id @default(autoincrement())
+  menuName    String      @db.VarChar(20)
+  priceLarge  Int
+  priceSet    Int
+  priceOnly   Int
+  categoryId  Int
+  categorytbl categorytbl @relation(fields: [categoryId], references: [categoryId], onDelete: NoAction, onUpdate: NoAction, map: "menutbl_categorytbl_categoryid_fk")
+  cart        cart[]      @ignore
+}

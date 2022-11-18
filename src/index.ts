@@ -3,10 +3,10 @@ const app = express();
 const PORT = 8000;
 
 app.use(express.json());
-app.use("/", require("./router"));
+app.use('/', require('./router'));
 
-app.get("/", (req: Request, res: Response, next: NextFunction) => {
-    res.send("main")
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
+    res.send('main');
 });
 
 app.listen(PORT, () => {
@@ -15,4 +15,4 @@ app.listen(PORT, () => {
               🛡️ Server listening on port: ${PORT} 🛡️
           #############################################
       `);
-  }); 
+});
