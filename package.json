@@ -1,5 +1,5 @@
 {
-    "name": "seminar3",
+    "name": "mcdelivery",
     "version": "1.0.0",
     "main": "index.js",
     "license": "MIT",
@@ -15,7 +15,7 @@
     },
     "devDependencies": {
         "@types/express": "^4.17.14",
-        "@types/node": "^18.11.0",
+        "@types/node": "^18.11.9",
         "nodemon": "^2.0.20",
         "prettier": "2.7.1"
     }
