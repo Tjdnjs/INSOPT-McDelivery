@@ -3,11 +3,11 @@ const prisma = new PrismaClient();
 
 const getCart = async () => {};
 
-const putCart = async () => {};
+const postCart = async () => {};
 
 const cartService = {
     getCart,
-    putCart,
+    postCart,
 };
 
 export default cartService;
