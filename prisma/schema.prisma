@@ -7,22 +7,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model allergytbl {
-  allergyName     String            @id(map: "allergytbl_pk") @db.VarChar(20)
-  menu_allergytbl menu_allergytbl[]
+model cart {
+  menuId   Int
+  largeSet Int     @default(0)
+  set      Int     @default(0)
+  only     Int     @default(0)
+  id       Int     @id @unique @default(autoincrement())
+  menutbl  menutbl @relation(fields: [menuId], references: [menuId], onDelete: Cascade, map: "cart_menutbl_menuid_fk")
 }
 
 model categorytbl {
   categoryName String    @id(map: "categorytbl_pk") @db.VarChar(40)
   menutbl      menutbl[]
-}
-
-model menu_allergytbl {
-  menuId      Int
-  allergyName String     @db.VarChar(20)
-  id          Int        @id @unique @default(autoincrement())
-  allergytbl  allergytbl @relation(fields: [allergyName], references: [allergyName], onDelete: Cascade, map: "table_name_allergytbl_allergyname_fk")
-  menutbl     menutbl    @relation(fields: [menuId], references: [menuId], onDelete: Cascade, map: "table_name_menutbl_menuid_fk")
 }
 
 model menutbl {
@@ -37,11 +33,16 @@ model menutbl {
   menu_allergytbl menu_allergytbl[]
 }
 
-model cart {
-  menuId   Int?
-  largeSet Int      @default(0)
-  set      Int?     @default(0)
-  only     Int?     @default(0)
-  id       Int      @id @unique @default(autoincrement())
-  menutbl  menutbl? @relation(fields: [menuId], references: [menuId], onDelete: Cascade, map: "cart_menutbl_menuid_fk")
+model allergytbl {
+  allergyName     String            @id(map: "allergytbl_pk") @db.VarChar(20)
+  menu_allergytbl menu_allergytbl[]
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model menu_allergytbl {
+  menuId      Int
+  allergyName String     @db.VarChar(20)
+  id          Int        @id @unique @default(autoincrement())
+  allergytbl  allergytbl @relation(fields: [allergyName], references: [allergyName], onDelete: Cascade, map: "table_name_allergytbl_allergyname_fk")
+  menutbl     menutbl    @relation(fields: [menuId], references: [menuId], onDelete: Cascade, map: "table_name_menutbl_menuid_fk")
 }

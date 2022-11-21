@@ -7,6 +7,6 @@ const router: Router = Router();
 router.get('/', cartController.getCart);
 
 //* 장바구니 담기 ( POST /cart/:menuId )
-router.get('/:menuId', cartController.putCart);
+router.post('/:menuId', cartController.postCart);
 
 export default router;
