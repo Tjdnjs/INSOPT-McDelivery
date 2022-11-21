@@ -12,9 +12,9 @@ const getCart = async () => {
                     priceLarge: true,
                     priceSet: true,
                     priceOnly: true,
-                }
-            }
-        }
+                },
+            },
+        },
     });
 
     if (menus.length === 0) return null;
@@ -35,7 +35,7 @@ const getCart = async () => {
                 set: '라지 세트',
                 price: menu.menutbl.priceLarge,
                 amount: menu.largeSet,
-            }
+            };
             details.push(detail);
         }
         if (menu.set !== 0) {
@@ -43,7 +43,7 @@ const getCart = async () => {
                 set: '세트',
                 price: menu.menutbl.priceSet,
                 amount: menu.set as number,
-            }
+            };
             details.push(detail);
         }
         if (menu.only !== 0) {
@@ -51,7 +51,7 @@ const getCart = async () => {
                 set: '단품',
                 price: menu.menutbl.priceOnly,
                 amount: menu.only as number,
-            }
+            };
             details.push(detail);
         }
 
