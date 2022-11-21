@@ -13,9 +13,8 @@ model cart {
   largeSet Int      @default(0)
   set      Int?     @default(0)
   only     Int?     @default(0)
+  id       Int      @id @unique @default(autoincrement())
   menutbl  menutbl? @relation(fields: [menuId], references: [menuId], onDelete: Cascade, map: "cart_menutbl_menuid_fk")
-
-  @@ignore
 }
 
 model categorytbl {
@@ -31,21 +30,20 @@ model menutbl {
   priceOnly       Int
   categoryName    String?           @db.VarChar(40)
   categorytbl     categorytbl?      @relation(fields: [categoryName], references: [categoryName], map: "menutbl_categorytbl_categoryname_fk")
-  cart            cart[]            @ignore
-  menu_allergytbl menu_allergytbl[] @ignore
+  cart            cart[]
+  menu_allergytbl menu_allergytbl[]
 }
 
 model allergytbl {
   allergyName     String            @id(map: "allergytbl_pk") @db.VarChar(20)
-  menu_allergytbl menu_allergytbl[] @ignore
+  menu_allergytbl menu_allergytbl[]
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model menu_allergytbl {
   menuId      Int
   allergyName String     @db.VarChar(20)
+  id          Int        @id @unique @default(autoincrement())
   allergytbl  allergytbl @relation(fields: [allergyName], references: [allergyName], onDelete: Cascade, map: "table_name_allergytbl_allergyname_fk")
   menutbl     menutbl    @relation(fields: [menuId], references: [menuId], onDelete: Cascade, map: "table_name_menutbl_menuid_fk")
-
-  @@ignore
 }
