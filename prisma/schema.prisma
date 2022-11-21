@@ -9,12 +9,12 @@ datasource db {
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model cart {
-  menuId   Int?
-  largeSet Int      @default(0)
-  set      Int?     @default(0)
-  only     Int?     @default(0)
-  id       Int      @id @unique @default(autoincrement())
-  menutbl  menutbl? @relation(fields: [menuId], references: [menuId], onDelete: Cascade, map: "cart_menutbl_menuid_fk")
+  menuId   Int
+  largeSet Int     @default(0)
+  set      Int?    @default(0)
+  only     Int?    @default(0)
+  id       Int     @id @unique @default(autoincrement())
+  menutbl  menutbl @relation(fields: [menuId], references: [menuId], onDelete: Cascade, map: "cart_menutbl_menuid_fk")
 }
 
 model categorytbl {
