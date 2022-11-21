@@ -7,11 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model allergytbl {
-  allergyName     String            @id(map: "allergytbl_pk") @db.VarChar(20)
-  menu_allergytbl menu_allergytbl[]
-}
-
 model cart {
   menuId   Int
   largeSet Int     @default(0)
