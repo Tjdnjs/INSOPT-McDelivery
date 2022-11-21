@@ -6,7 +6,7 @@ import { cartService } from '../service';
 const getCart = async (req: Request, res: Response) => {
     try {
         const result = await cartService.getCart();
-        if (!result) return res.status(200).send({ status: 200, message: '담은 메뉴가 없습니다.' });
+        if (!result) return res.status(204).send({ status: 204, message: '담은 메뉴가 없습니다.' });
         return res.status(200).send({ status: 200, message: '장바구니 조회 성공', data: result });
     } catch (error) {
         console.log(error);
