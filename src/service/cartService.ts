@@ -62,14 +62,39 @@ const getCart = async () => {
 };
 
 const postCart = async (menuId: number, cartpostRequestDto: CartPostRequestDto) => {
+    const existData = await prisma.cart.findFirst({
+        where: {
+            menuId: menuId,
+        },
+    });
+    const largeSet = cartpostRequestDto.largeSet;
+    const set =  cartpostRequestDto.set;
+    const only =  cartpostRequestDto.only;
+
+    if (existData){
+        const updateData = await prisma.cart.update({
+            where: {
+                menuId: menuId,
+            },
+            data: {
+                largeSet: existData.largeSet+largeSet,
+                set: existData.set+set,
+                only: existData.only+only,
+            }
+        })
+
+        return updateData;
+    }
+
     const createdData = await prisma.cart.create({
         data: {
             menuId,
-            largeSet: cartpostRequestDto.largeSet,
-            set: cartpostRequestDto.set,
-            only: cartpostRequestDto.only,
+            largeSet: largeSet,
+            set: set,
+            only: only,
         },
     });
+
     return createdData;
 };
 
