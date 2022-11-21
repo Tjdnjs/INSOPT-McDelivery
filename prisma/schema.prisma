@@ -7,7 +7,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model allergytbl {
+  allergyName     String            @id(map: "allergytbl_pk") @db.VarChar(20)
+  menu_allergytbl menu_allergytbl[]
+}
+
 model cart {
   menuId   Int
   largeSet Int     @default(0)
