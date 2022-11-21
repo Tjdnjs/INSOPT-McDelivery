@@ -19,18 +19,33 @@ model cart {
 }
 
 model categorytbl {
-  categoryId   Int       @id @default(autoincrement())
-  categoryName String    @db.VarChar(40)
+  categoryName String    @id(map: "categorytbl_pk") @db.VarChar(40)
   menutbl      menutbl[]
 }
 
 model menutbl {
-  menuId      Int         @id @default(autoincrement())
-  menuName    String      @db.VarChar(20)
-  priceLarge  Int
-  priceSet    Int
-  priceOnly   Int
-  categoryId  Int
-  categorytbl categorytbl @relation(fields: [categoryId], references: [categoryId], onDelete: NoAction, onUpdate: NoAction, map: "menutbl_categorytbl_categoryid_fk")
-  cart        cart[]      @ignore
+  menuId          Int               @id @default(autoincrement())
+  menuName        String            @db.VarChar(20)
+  priceLarge      Int
+  priceSet        Int
+  priceOnly       Int
+  categoryName    String?           @db.VarChar(40)
+  categorytbl     categorytbl?      @relation(fields: [categoryName], references: [categoryName], map: "menutbl_categorytbl_categoryname_fk")
+  cart            cart[]            @ignore
+  menu_allergytbl menu_allergytbl[] @ignore
+}
+
+model allergytbl {
+  allergyName     String            @id(map: "allergytbl_pk") @db.VarChar(20)
+  menu_allergytbl menu_allergytbl[] @ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model menu_allergytbl {
+  menuId      Int
+  allergyName String     @db.VarChar(20)
+  allergytbl  allergytbl @relation(fields: [allergyName], references: [allergyName], onDelete: Cascade, map: "table_name_allergytbl_allergyname_fk")
+  menutbl     menutbl    @relation(fields: [menuId], references: [menuId], onDelete: Cascade, map: "table_name_menutbl_menuid_fk")
+
+  @@ignore
 }
